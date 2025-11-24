@@ -7,7 +7,6 @@
 | **Submission Track** | **Agents for Good** |
 | **Core Concept** | Multi-Agent System (Sequential Orchestration) |
 | **Primary Goal** | Convert spoken grievance into structured, actionable legal document. |
-| **GitHub Link** | [Insert your Public GitHub Repository URL here] |
 
 ---
 
