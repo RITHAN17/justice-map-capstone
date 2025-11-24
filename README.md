@@ -1,48 +1,85 @@
-# JusticeMap: The Vernacular AI Agent Converting Spoken Grievances into Actionable Legal Documents
+# JusticeMap: The Vernacular AI Legal Guide
 
-**Track:** Agents for Good | **Core Concept:** Multi-Agent Legal Triage
+**Capstone Project for the 5-Day AI Agents Intensive Course with Google**
+
+| Detail | Status |
+| :--- | :--- |
+| **Submission Track** | **Agents for Good** |
+| **Core Concept** | Multi-Agent System (Sequential Orchestration) |
+| **Primary Goal** | Convert spoken grievance into structured, actionable legal document. |
+| **GitHub Link** | [Insert your Public GitHub Repository URL here] |
 
 ---
 
-## 1. 🎯 The Problem and Value Proposition
+## 1. 🎯 Problem Statement and Value Proposition
 
-The Indian legal system is blocked by a **literacy and language barrier**. JusticeMap eliminates this by using a **Voice-First, Vernacular AI Agent** to automate the time-consuming administrative intake. This frees up human legal experts (PLVs/Lawyers) to focus on counsel, acting as an **Efficiency Multiplier** for the system.
+### The Problem: The Critical Barrier to Justice
+
+The pursuit of justice for millions of citizens is blocked by **legal illiteracy and language barriers**. Current digital portals are complex, excluding low-literacy, vernacular-first users from accessing free legal aid services (NALSA). This forces the most vulnerable to suffer injustice (e.g., wage theft) or rely on costly, unreliable intermediaries.
+
+### The Solution: JusticeMap AI Avatar
+
+**JusticeMap** is a specialized, **Voice-First, Vernacular AI Agent** designed to eliminate this barrier. It uses a **Multi-Agent Architecture** to fully automate the initial intake and documentation process for claims like Wage Theft.
+
+### Value Proposition (The AI Efficiency Multiplier)
+
+* **Equity and Access:** The voice-first interface eliminates the literacy barrier, restoring confidence for vernacular users.
+* **System Efficiency:** JusticeMap acts as an **Efficiency Multiplier** for human legal resources (PLVs/Lawyers). By automatically handling the administrative intake, the agent saves an estimated **50%+ of time** per client, allowing human experts to focus solely on counsel and representation.
+
+---
 
 ## 2. 🏗️ Agent Architecture and Concepts Demonstrated
 
-JusticeMap uses a Sequential Multi-Agent System to ensure high-fidelity data collection: 
+JusticeMap is built using a **Sequential Multi-Agent System** to ensure reliable, high-fidelity data collection. This architecture is crucial for guaranteeing data quality in a legal context.
 
-| Agent / Component | Course Concept | Role in JusticeMap |
+
+
+### Core Course Concepts Implemented (50 Points)
+
+| Course Concept | Component Name | Role in JusticeMap |
 | :--- | :--- | :--- |
-| **Root Agent** | **Sequential Agent** + **Sessions & Memory** | Orchestrates the entire flow (Validation → Drafting) and shares facts across agents. |
-| **Triage Agent** | **LLM Agent (Gemini)** | Conducts the vernacular conversation and extracts facts (e.g., 'applicant_name'). |
-| **Loop Agent** | **Loop Agent** | **Validates data quality.** Runs a loop to ensure ALL critical facts are collected before proceeding. |
-| **Drafting Agent** | **A2A Protocol** + **Custom Tool** | Receives structured facts and executes the Custom Tool to finalize the document. |
-| **`generate_nalza_draft`** | **Custom Tool** | Deterministically formats the verified facts into the final, legally structured template. |
+| **Multi-Agent System** | `RootAgent` | Orchestrates the strict, sequential flow (Triage → Validate → Draft). |
+| **Loop Agent** | `ValidationLoop` | **Data Quality Guarantee.** Runs an iterative loop to ensure all **critical facts** (`applicant_name`, `amount_claimed`, etc.) are present before proceeding. |
+| **Custom Tools** | `generate_nalza_draft()` | **Deterministic Output.** A Python function that formats verified facts into the final, legally structured template, ensuring accuracy (not relying on the LLM for drafting). |
+| **Sessions & Memory** | `InMemorySessionService` | Stores all extracted facts (`verified_facts`) in state, allowing agents to share data and pick up the conversation across turns. |
+| **A2A Protocol** | Triage Agent $\leftrightarrow$ Drafting Agent | Transfers the complete, structured fact dictionary across the pipeline cleanly. |
+| **LLM Agent Use** | `TriageAgent` (Gemini) | Handles the complex vernacular reasoning and empathetic conversation flow. |
 
-## 3. 🚀 Setup and Run Instructions
+---
 
-1.  **Environment Setup:**
+## 3. ⚙️ Setup and Run Instructions
+
+### Prerequisites
+
+* Python 3.10+
+* The `google-adk` library
+* A Gemini API Key
+
+### Execution Steps
+
+1.  **Clone the Repository:**
     ```bash
-    # Create and activate environment
-    python -m venv venv
-    .\venv\Scripts\activate
+    git clone YOUR_GITHUB_REPO_URL_HERE
+    cd justice_map_capstone
+    ```
 
-    # Install dependencies
+2.  **Setup and Activate Environment:**
+    ```bash
+    python -m venv venv
+    .\venv\Scripts\activate  # Windows command
     pip install google-adk
     ```
-2.  **API Key:** Set your key as an environment variable (crucial for running):
+
+3.  **Set API Key (Crucial):** Set your Gemini API key as an environment variable in your terminal:
     ```powershell
-    $env:GEMINI_API_KEY='YOUR_API_KEY_HERE'
+    $env:GEMINI_API_KEY='YOUR_API_KEY'
     ```
-3.  **Execution:** Run the test script:
+
+4.  **Run the Agent:** Execute the test script to simulate the full sequential flow:
     ```bash
     python run_justice_map.py
     ```
 
----
+### Expected Output
 
-## 4. 📈 Expected Outcomes
-
-* **System Efficiency:** Reduces manual PLV intake time by **50%+**.
-* **Access Metric:** Increases the **Grievance-to-Application Conversion Rate** for vulnerable users.
+The script will print the conversational flow as the **Triage Agent** gathers data, followed by confirmation messages from the **Loop Agent**, and finally, the completed **`DOCUMENT_TEMPLATE`** text generated by the **Custom Tool**.
